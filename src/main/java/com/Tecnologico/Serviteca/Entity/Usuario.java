@@ -9,28 +9,40 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.*;
 import java.io.Serializable;
-@Entity
-public class Usuario implements Serializable {
 
+@Entity
+@Table(name = "usuario")
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Usuario implements Serializable {
     private static long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
     private Long id;
-    private String login;
+    @Column(name="username")
+    private String username;
+    @Column(name="password")
     private String password;
+    @Column(name="email")
     private String email;
+    @Column(name="telefono")
     private String telefono;
+    @Column(name="nombre")
     private String nombre;
+    @Column(name="apellido")
     private String apellido;
+    @Column(name="activo",columnDefinition = "BOOLEAN DEFAULT true" )
+    private boolean enabled;
 
     public Usuario() {
     }
 
     public Usuario(Long id, String login, String password, String email, String telefono) {
         this.id = id;
-        this.login = login;
+        this.username = login;
         this.password = password;
         this.email = email;
         this.telefono = telefono;
@@ -49,22 +61,29 @@ public class Usuario implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (getId() != null ? getId().hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
+
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (this == object) {
+            return true;
+        }
         if (!(object instanceof Usuario)) {
             return false;
         }
         Usuario other = (Usuario) object;
-        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id))) {
+        if (id == null && other.id == null) {
+            return true;
+        }
+        if (id == null || other.id == null) {
             return false;
         }
-        return true;
+        return id.equals(other.id);
     }
+
 
     @Override
     public String toString() {
@@ -88,15 +107,15 @@ public class Usuario implements Serializable {
     /**
      * @return the login
      */
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
     /**
-     * @param login the login to set
+     * @param username the login to set
      */
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
@@ -169,4 +188,11 @@ public class Usuario implements Serializable {
         this.apellido = apellido;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 }

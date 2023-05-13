@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Servicios implements Serializable {
+public class Servicio implements Serializable {
 
     private static long serialVersionUID = 1L;
     @Id
@@ -27,10 +27,10 @@ public class Servicios implements Serializable {
     private Vehiculo vehiculo;
     private String observaciones;
 
-    public Servicios() {
+    public Servicio() {
     }
 
-    public Servicios(Long id, Date fecha, Date hora, Operador operador, Vehiculo vehiculo, String observaciones) {
+    public Servicio(Long id, Date fecha, Date hora, Operador operador, Vehiculo vehiculo, String observaciones) {
         this.id = id;
         this.fecha = fecha;
         this.hora = hora;
@@ -60,10 +60,10 @@ public class Servicios implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Servicios)) {
+        if (!(object instanceof Servicio)) {
             return false;
         }
-        Servicios other = (Servicios) object;
+        Servicio other = (Servicio) object;
         if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -72,7 +72,7 @@ public class Servicios implements Serializable {
 
     @Override
     public String toString() {
-        return "com.Entity.Servicios[ id=" + getId() + " ]";
+        return "com.Entity.Servicio[ id=" + getId() + " ]";
     }
 
     /**

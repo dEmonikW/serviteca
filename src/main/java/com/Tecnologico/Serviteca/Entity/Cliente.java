@@ -11,36 +11,23 @@ import java.io.Serializable;
 import java.util.List;
 
 
-@Entity
-public class Cliente implements Serializable {
+@Entity(name ="cliente")
+@PrimaryKeyJoinColumn(name="id")
+public class Cliente extends Usuario implements Serializable {
 
     private static long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     private String direccion;
-    private String ocupacion;
     @OneToMany(mappedBy = "propietario")
     private List<Vehiculo> vehiculos;
 
     public Cliente() {
     }
 
-    public Cliente(Long id, String direccion, String ocupacion) {
-        this.id = id;
+    public Cliente(String direccion) {
         this.direccion = direccion;
-        this.ocupacion = ocupacion;
+
     }
 
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Override
     public int hashCode() {
@@ -49,18 +36,6 @@ public class Cliente implements Serializable {
         return hash;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cliente)) {
-            return false;
-        }
-        Cliente other = (Cliente) object;
-        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
 
     @Override
     public String toString() {
@@ -94,19 +69,7 @@ public class Cliente implements Serializable {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-
-    /**
-     * @return the ocupacion
-     */
-    public String getOcupacion() {
-        return ocupacion;
-    }
-
-    /**
-     * @param ocupacion the ocupacion to set
-     */
-    public void setOcupacion(String ocupacion) {
-        this.ocupacion = ocupacion;
-    }
-
 }
+
+
+
