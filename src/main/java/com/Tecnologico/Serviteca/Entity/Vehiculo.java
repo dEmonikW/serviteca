@@ -15,7 +15,7 @@ import java.util.List;
 public class Vehiculo implements Serializable {
 
     @OneToMany(mappedBy = "vehiculo")
-    private List<Servicios> servicios;
+    private List<Servicio> servicios;
 
     private static long serialVersionUID = 1L;
     @Id

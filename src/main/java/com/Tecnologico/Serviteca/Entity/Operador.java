@@ -12,37 +12,28 @@ import java.util.Date;
 import java.util.List;
 
 
-@Entity
-public class Operador implements Serializable {
+@Entity(name="operador")
+@PrimaryKeyJoinColumn(name="id")
+public class Operador extends Usuario implements Serializable {
 
-    private static long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     private String especialidad;
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
     @OneToMany(mappedBy = "operador")
-    private List<Servicios> servicios;
+    private List<Servicio> servicios;
 
     public Operador() {
     }
 
-    public Operador(Long id, String especialidad, Date fechaInicio) {
-        this.id = id;
+    public Operador(String especialidad, Date fechaInicio) {
+
         this.especialidad = especialidad;
         this.fechaInicio = fechaInicio;
     }
 
 
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Override
     public int hashCode() {
@@ -58,7 +49,7 @@ public class Operador implements Serializable {
             return false;
         }
         Operador other = (Operador) object;
-        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id))) {
+        if ((this.getId() == null && other.getId() != null) || (this.getId() != null )) {
             return false;
         }
         return true;
@@ -69,19 +60,7 @@ public class Operador implements Serializable {
         return "com.Entity.Operador[ id=" + getId() + " ]";
     }
 
-    /**
-     * @return the serialVersionUID
-     */
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
-    /**
-     * @param aSerialVersionUID the serialVersionUID to set
-     */
-    public static void setSerialVersionUID(long aSerialVersionUID) {
-        serialVersionUID = aSerialVersionUID;
-    }
 
     /**
      * @return the especialidad
